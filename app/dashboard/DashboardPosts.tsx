@@ -24,7 +24,7 @@ export default function DashboardPosts({ userId }: { userId: string }) {
       const res = await fetch(`/api/dashboard-posts?userId=${userId}`);
       const data = await res.json();
 
-      const parsed = data.map((post: any) => ({
+      const parsed = data.map((post: BlogPost) => ({
         ...post,
         createdAt: new Date(post.createdAt),
         updatedAt: new Date(post.updatedAt),
