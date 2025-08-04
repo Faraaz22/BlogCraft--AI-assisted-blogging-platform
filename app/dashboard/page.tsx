@@ -4,7 +4,7 @@ import { prisma } from '../utils/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { BlogPostCard } from '../components/General/BlogpostCard';
 import { Suspense } from 'react';
-import { redirect } from 'next/navigation';a
+import { redirect } from 'next/navigation';
 
 async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulated delay
