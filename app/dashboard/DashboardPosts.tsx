@@ -1,4 +1,3 @@
-// app/dashboard/DashboardPosts.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -11,7 +10,9 @@ type BlogPost = {
   imageUrl: string;
   authorImage: string;
   authorName: string;
-  createdAt: string;
+  createdAt: Date;
+  updatedAt: Date;
+  authorId: string;
 };
 
 export default function DashboardPosts({ userId }: { userId: string }) {
@@ -22,14 +23,21 @@ export default function DashboardPosts({ userId }: { userId: string }) {
     async function fetchPosts() {
       const res = await fetch(`/api/dashboard-posts?userId=${userId}`);
       const data = await res.json();
-      setPosts(data);
+
+      const parsed = data.map((post: any) => ({
+        ...post,
+        createdAt: new Date(post.createdAt),
+        updatedAt: new Date(post.updatedAt),
+      }));
+
+      setPosts(parsed);
       setLoading(false);
     }
 
     fetchPosts();
   }, [userId]);
 
-  if (loading) return null; 
+  if (loading) return null;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
