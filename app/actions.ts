@@ -5,6 +5,8 @@ import { revalidatePath } from 'next/cache';
 // import { redirect } from 'next/dist/server/api-utils'
 import { redirect } from 'next/navigation'
 
+
+
 export async function handleSubmission(formData : FormData) {
 
     const {getUser} = getKindeServerSession();
@@ -29,8 +31,6 @@ export async function handleSubmission(formData : FormData) {
             }
         })
         console.log(data.id)
-
-        revalidatePath("/")
         return redirect("/dashboard")
     }
 
