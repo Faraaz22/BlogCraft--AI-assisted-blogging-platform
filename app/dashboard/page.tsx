@@ -10,13 +10,24 @@ async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulated delay
 
   const data = await prisma.blogPost.findMany({
-    where: {
-      authorId: userId,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  where: {
+    authorId: userId,
+  },
+  orderBy: {
+    createdAt: 'desc',
+  },
+  select: {
+    id: true,
+    title: true,
+    content: true,
+    imageUrl: true,
+    authorName: true,
+    authorImage: true,
+    createdAt: true,
+    updatedAt: true,
+    authorId: true,
+  },
+});
 
   return data;
 }
