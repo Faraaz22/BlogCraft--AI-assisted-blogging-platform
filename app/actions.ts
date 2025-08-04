@@ -1,8 +1,11 @@
 "use server"
 import {prisma} from '@/app/utils/db'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { revalidatePath } from 'next/cache';
 // import { redirect } from 'next/dist/server/api-utils'
 import { redirect } from 'next/navigation'
+
+export const revalidate =60;
 
 export async function handleSubmission(formData : FormData) {
 
@@ -28,6 +31,8 @@ export async function handleSubmission(formData : FormData) {
             }
         })
         console.log(data.id)
+
+        revalidatePath("/")
         return redirect("/dashboard")
     }
 
@@ -39,7 +44,7 @@ export async function generateContentAction(formData: FormData) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'llama3.2', // Or any other model like 'mistral'
+        model: 'llama3.2', 
         prompt,
         stream: false,
       }),
