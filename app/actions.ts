@@ -27,6 +27,7 @@ export async function handleSubmission(formData : FormData) {
                 authorName:user.given_name as string
             }
         })
+        console.log(data.id)
         return redirect("/dashboard")
     }
 

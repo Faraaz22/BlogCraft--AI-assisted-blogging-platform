@@ -4,6 +4,7 @@ import { prisma } from '../utils/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { BlogPostCard } from '../components/General/BlogpostCard';
 import { Suspense } from 'react';
+import { redirect } from 'next/navigation';a
 
 async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulated delay
@@ -24,9 +25,9 @@ export default async function DashboardRoute() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  // if (!user) {
-  //   return redirect('/api/auth/register');
-  // }
+  if (!user) {
+    return redirect('/api/auth/register');
+  }
 
   const data = await getData(user.id);
 
@@ -46,7 +47,7 @@ export default async function DashboardRoute() {
       <Suspense fallback={<p className="text-gray-500">Loading your posts...</p>}>
         {data.length === 0 ? (
           <div className="text-center text-gray-500 mt-20">
-            <p className="text-lg">You haven't written any posts yet.</p>
+<p className="text-lg">You haven&apos;t written any posts yet.</p>
             <Link
               href="/dashboard/create"
               className="mt-4 inline-block text-sm font-medium text-blue-600 hover:underline"

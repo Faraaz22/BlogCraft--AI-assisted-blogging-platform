@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Loader2 } from 'lucide-react'
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
